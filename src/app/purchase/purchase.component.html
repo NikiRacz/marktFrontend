@@ -1,0 +1,46 @@
+<h3>Add new Purchase</h3>
+<div>
+    <form [formGroup]="myForm">
+        Value: {{ myForm.value | json }}
+        <hr />
+        <mat-form-field [formGroup]="myForm">
+            <mat-label>Customer</mat-label>
+            <mat-select formControlName="customer" name="customer">
+                @for (option of customers; track option){
+                <mat-option [value]="option.name">{{ option.name }} </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <div [formGroup]="myForm">
+            <div formArrayName="purchases">
+                <div *ngFor="let purchase of purchaseForm.controls; let i = index" [formGroupName]="i">
+                    <mat-form-field>
+                        <mat-label>Product</mat-label>
+                        <mat-select formControlName="product">
+                            @for (option of products; track option){
+                            <mat-option [value]="option.name">{{ option.name }} </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Amount</mat-label>
+                        <input matInput placeholder="Amount" formControlName="amount" />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Price</mat-label>
+                        <input matInput placeholder="Price" formControlName="price" />
+                    </mat-form-field>
+
+                    <button mat-raised-button color="warn" (click)="deletePurchase(i)">
+            Delete
+          </button>
+                </div>
+            </div>
+        </div>
+        <button mat-raised-button color="primary" (click)="addPurchase()">
+      Add Purchase
+    </button>
+        <button mat-raised-button (submit)="onSubmit()">Ok</button>
+    </form>
+</div>

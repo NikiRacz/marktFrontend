@@ -1,0 +1,14 @@
+<div>
+    <form (submit)="onSubmit()">
+        <input type="text" [(ngModel)]="userInput.name" name="userInput" />
+        <input type="text" [(ngModel)]="userInput.sort" name="userInput" />
+        <button>Submit</button>
+    </form>
+</div>
+
+<h1>Product Liste</h1>
+<div *ngIf="productList | async as products">
+    <ul *ngFor="let product of products">
+        <li>{{ product.name }}</li>
+    </ul>
+</div>

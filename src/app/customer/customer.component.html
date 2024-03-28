@@ -1,0 +1,12 @@
+<h1>List of Costumers</h1>
+<div *ngIf="customersList | async as customers">
+    <ul *ngFor="let customer of customers">
+        <li>{{ customer.name }}</li>
+    </ul>
+</div>
+<div>
+    <form (submit)="onSubmit()">
+        <input type="text" [(ngModel)]="userInput.name" name="userInput" />
+        <button>Submit</button>
+    </form>
+</div>
